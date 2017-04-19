@@ -1,0 +1,55 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner in = new Scanner(System.in);
+        String s = "";        
+        String s_rvrs = "";
+        List<String> str = new ArrayList<String>();
+        List<String> str_rvrs = new ArrayList<String>();
+        int t_case = in.nextInt();
+        //String is set
+        for(int i = 0; i < t_case; i++){
+            
+            s = in.next();
+            str.add(s);
+            
+        }
+        //String reverse is set
+        for(int j = 0; j<str.size(); j++){
+            s_rvrs = "";
+            for(int i = str.get(j).length()-1; i>=0; i--){
+                s_rvrs = s_rvrs + Character.toString(str.get(j).charAt(i));
+            }
+            
+            str_rvrs.add(s_rvrs);
+        }
+        
+        //System.out.println(str.get(0).length());
+        for(int i = 0; i<str.size(); i++){
+            //System.out.print(str.get(i).length());
+            for(int j = 1; j<str.get(i).length(); j++){
+                int str_value = (int) str.get(i).charAt(j);
+                int str_value1 = (int) str.get(i).charAt(j-1);
+                int str_rvrs_value = (int) str_rvrs.get(i).charAt(j);
+                int str_rvrs_value1 = (int) str_rvrs.get(i).charAt(j-1);
+                
+                if(Math.abs(str_value - str_value1) != Math.abs(str_rvrs_value - str_rvrs_value1)){
+                    System.out.println("Not Funny");
+                    break;
+                }
+                else if((j == str.get(i).length()-1) && (Math.abs(str_value - str_value1) == Math.abs(str_rvrs_value - str_rvrs_value1))){
+                    System.out.println("Funny");
+                }
+            }
+            
+        }
+        
+    }
+}
