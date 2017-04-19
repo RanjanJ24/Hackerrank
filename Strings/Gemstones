@@ -1,0 +1,43 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        HashMap<String,Integer> f_string = new HashMap<String,Integer>();
+        List<String> r_string = new ArrayList<String>();
+        int flag = 0;
+        int real_count = 0;
+        int size = in.nextInt();
+        String s = in.next();
+        
+        for(int i = 0; i < s.length(); i++){
+            
+                f_string.put(Character.toString(s.charAt(i)), 1);
+            
+        }
+        //System.out.print(f_string);
+        for(int i = 1; i < size; i++){
+            r_string.add(in.next());
+        }
+        
+        List<String> keys = new ArrayList<String>(f_string.keySet());
+        //System.out.print(keys);
+        for(int i = 0; i<keys.size(); i++){
+            for(int j = 0; j<r_string.size(); j++){
+                if(r_string.get(j).contains(keys.get(i))){
+                    flag++;
+                }
+            }
+            if(flag>=size-1){
+                real_count++;
+            }
+            flag = 0;
+        }
+        System.out.print(real_count);
+    }
+}
