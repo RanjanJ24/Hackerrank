@@ -1,0 +1,13 @@
+n = input()
+a = map(int,raw_input().split(' '))
+b = {}
+for x in a:
+    if b.has_key(x):
+        b[x] += 1;
+    else:
+        b[x] = 1
+        
+ans = 0
+for x in b:
+    ans += b[x] / 2
+print ans
