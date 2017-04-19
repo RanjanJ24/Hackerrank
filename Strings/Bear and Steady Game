@@ -1,0 +1,49 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+
+n = int(raw_input())
+s = raw_input()
+
+d = n/4
+a = reduce(lambda x, y: x + 1 if y == 'A' else x, s, 0)
+c = reduce(lambda x, y: x + 1 if y == 'C' else x, s, 0)
+g = reduce(lambda x, y: x + 1 if y == 'G' else x, s, 0)
+t = reduce(lambda x, y: x + 1 if y == 'T' else x, s, 0)
+
+diffa = a-d
+diffc = c-d
+diffg = g-d
+difft = t-d
+
+if (diffa == 0 and diffc == 0 and diffg == 0 and difft == 0):
+    print 0
+else:
+    min_length = len(s)
+    num_as = 0
+    num_cs = 0
+    num_gs = 0
+    num_ts = 0
+    idx_a = []
+    idx_c = []
+    idx_g = []
+    idx_t = []
+    for i in xrange(len(s)):
+        if s[i] == 'A':
+            num_as += 1
+            idx_a.append(i)
+        elif s[i] == 'C':
+            num_cs += 1
+            idx_c.append(i)
+        elif s[i] == 'G':
+            num_gs += 1
+            idx_g.append(i)
+        else:
+            num_ts += 1
+            idx_t.append(i)
+            
+        if max(0, diffa) <= num_as and max(0, diffc) <= num_cs and max(0, diffg) <= num_gs and max(0, difft) <= num_ts:
+
+            new_min_length = (i - min(idx_a[max(0,num_as-diffa)] if diffa > 0 else i, idx_c[max(0,num_cs-diffc)] if diffc > 0 else i, idx_g[max(0,num_gs-diffg)] if diffg > 0 else i, idx_t[max(0,num_ts-difft)] if difft > 0 else i)) + 1
+            if new_min_length < min_length:
+                min_length = new_min_length
+
+    print min_length
