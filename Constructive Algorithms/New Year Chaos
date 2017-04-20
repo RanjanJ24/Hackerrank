@@ -1,0 +1,28 @@
+t = int(raw_input())
+for _ in range(t):
+    n = int(raw_input())
+    arr = map(int, raw_input().split())
+    org = range(n+1)
+    pos = range(n+1)
+    cnt = [0]*(n + 1)
+
+    ans = 0
+    invalid = 0
+    for i in xrange(n - 1, -1, -1):
+            if invalid:
+                break
+            oldp = pos[arr[i]] 
+            newp = i + 1
+            while oldp != newp:
+                ans = ans + 1
+                cnt[org[oldp + 1]] += 1
+                if cnt[org[oldp + 1]] > 2:
+                    invalid = 1
+                    break
+                org[oldp], org[oldp+1] = org[oldp+1], org[oldp]
+                pos[org[oldp]] = oldp
+                pos[org[oldp + 1]] = oldp+1
+                oldp = oldp + 1
+    if invalid:
+        ans = "Too chaotic"
+    print ans

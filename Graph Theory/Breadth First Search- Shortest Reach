@@ -1,0 +1,34 @@
+def find_distance(V, nv, start):
+    distance = [-1 for i in xrange(nv)]
+    visited = [False for i in xrange(nv)]
+    
+    queue = [start]
+    distance[start] = 0
+    while queue:
+        if not visited[queue[0]]:
+            for i in V[queue[0]]:
+                if distance[i] == -1:
+                    distance[i] = distance[queue[0]] + 6
+                else:
+                    distance[i] = min(distance[i], distance[queue[0]] + 6)
+                queue.append(i)
+            visited[queue[0]] = True
+        del queue[0]
+    
+    del distance[start]
+    
+    print " ".join([str(d) for d in distance])
+
+for i in xrange(int(raw_input())):
+    nv,ne = map(int, raw_input().split())
+    
+    vertices = [set() for i in xrange(nv)]
+    
+    for e in xrange(ne):
+        u,v = map(int, raw_input().split())
+        vertices[u-1].add(v-1)
+        vertices[v-1].add(u-1)
+    
+    start = int(raw_input())
+    
+    find_distance(vertices, nv, start-1)
