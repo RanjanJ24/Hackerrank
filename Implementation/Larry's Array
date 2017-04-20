@@ -1,0 +1,26 @@
+def rotate(a, st):
+    a[st], a[st+1], a[st+2] = a[st+1], a[st+2], a[st]
+
+T = int(raw_input())
+for case in range(T):
+    N = int(raw_input())
+    a = map(int, raw_input().split())
+    cur = N
+    while cur > 3:
+        idx = a.index(cur)
+        while idx != cur-1:
+            if idx == cur-2:
+                rotate(a, idx-1)
+                rotate(a, idx-1)
+                idx = cur-1
+                continue
+            rotate(a, idx)
+            idx = idx+2
+        cur -= 1
+    if a[:3] == [1,2,3] or a[:3] == [2,3,1] or a[:3] == [3,1,2]:
+        print "YES"
+    else:
+        print "NO"
+        
+        
+        
