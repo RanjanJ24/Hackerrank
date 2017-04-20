@@ -1,0 +1,14 @@
+n,k=map(int,raw_input().strip().split())
+s=map(int,list(raw_input().strip()))
+res=[]
+res.append(s[0])
+if n>k:
+  maxj=k
+else:
+  maxj=n
+for j in xrange(1,maxj):
+  res.append(s[j]^s[j-1])
+if n>k:
+  for j in xrange(k,n):
+    res.append(s[j]^s[j-1]^res[j-k])
+print "".join(map(repr,res))
