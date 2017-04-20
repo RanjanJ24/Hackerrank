@@ -1,0 +1,47 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    private static long makeChange(int[] coins, int money){
+        return makeChange(coins, money, 0, new HashMap<String, Long>());
+    }
+    private static long makeChange(int[] coins, int money, int index, HashMap<String, Long> memo){
+        int totalcostwithCoin = 0;
+        if(money == 0){
+            return 1;
+        }
+        if(index >= coins.length){
+            return 0;
+        }
+        String key = money + "-" + index;
+        if(memo.containsKey(key)){
+            return memo.get(key);
+        }
+        long ways = 0;
+        while(totalcostwithCoin <= money){
+            int remaining;
+            remaining = money - totalcostwithCoin;
+            ways += makeChange(coins, remaining, index + 1, memo);
+            totalcostwithCoin += coins[index];
+        }
+        memo.put(key, ways);
+        return ways;
+    }
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner in = new Scanner(System.in);
+        int sum = in.nextInt();
+        int no = in.nextInt();
+        int[] coins = new int[no];
+        for(int i = 0; i<no; i++){
+            coins[i] = in.nextInt();
+            
+        }
+        long ways = makeChange(coins, sum);
+        System.out.print(ways);
+    }
+}
