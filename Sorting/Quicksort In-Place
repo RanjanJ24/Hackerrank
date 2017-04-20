@@ -1,0 +1,68 @@
+import java.io.BufferedInputStream;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Solution {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner( new BufferedInputStream(System.in) );
+		
+		int n = sc.nextInt();
+		int[] array = new int[n];
+		for (int i = 0; i < n; ++i) {
+			array[i] = sc.nextInt();
+		}
+		
+		quickSort(array);
+	}
+	
+	static void quickSort(int[] ar) {
+		quickSort(ar, 0, ar.length);
+	}
+	
+	
+	static void quickSort(int[] ar, int start, int end) {
+		if (end-start <= 1) return;
+		int pivotLoc = partition(ar, start, end);
+//		System.out.format("start=%d, pivot=%d, end=%d    ", start, pivotLoc, end);
+		System.out.println(arrayString(ar));
+		// now recurse
+		quickSort(ar, start, pivotLoc);
+		quickSort(ar, pivotLoc+1, end);
+	}
+	
+	private static String arrayString(int[] ar) {
+		if (ar.length == 0) return "";
+		StringBuilder b = new StringBuilder();
+		b.append(ar[0]);
+		for (int i = 1; i < ar.length; ++i) {
+			b.append(' ');
+			b.append(ar[i]);
+		}
+		return b.toString();
+	}
+	static int partition(int[] ar, int start, int end) {
+		int p = ar[end-1];
+		int leftEnd = start;
+		for (int i = start; i < end-1; ++i) {
+			if (ar[i] < p) {
+				// add to left; increase left
+				int temp = ar[i];
+				ar[i] = ar[leftEnd];
+				ar[leftEnd] = temp;
+				leftEnd++;
+			} else if (ar[i] > p) {
+				// add to right (keep in place??)
+			} else {
+				// impossible
+				throw new RuntimeException("We assume this never happens!");
+			}
+		}
+		// now add the pivot at the end of the left subrange
+		ar[end-1] = ar[leftEnd];
+		ar[leftEnd] = p;
+		// this is ok because that value is larger than p
+		return leftEnd;
+	}
+
+}

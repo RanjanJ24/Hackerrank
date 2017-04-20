@@ -1,0 +1,52 @@
+import java.util.*;
+public class Solution {
+       
+    static void partition(int[] ar) {
+        int p = ar[0];
+        List<Integer> l = new ArrayList<Integer>();
+        List<Integer> r = new ArrayList<Integer>();
+        List<Integer> e = new ArrayList<Integer>();
+        for(int i = 0; i < ar.length; i++){
+            if(ar[i]<p){
+                l.add(ar[i]);
+            }
+            else if(ar[i]>p){
+                r.add(ar[i]);
+            }
+            else{
+                e.add(ar[i]);
+            }
+            
+        }
+        for(int i = 0; i<l.size(); i++){
+            System.out.print(l.get(i));
+            System.out.print(" ");
+        }
+        for(int i = 0; i<e.size(); i++){
+            System.out.print(e.get(i));
+            System.out.print(" ");
+        }
+        for(int i = 0; i<r.size(); i++){
+            System.out.print(r.get(i));
+            System.out.print(" ");
+        }
+        
+     }   
+ 
+    static void printArray(int[] ar) {
+         for(int n: ar){
+            System.out.print(n+" ");
+         }
+           System.out.println("");
+      }
+       
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int[] ar = new int[n];
+        for(int i=0;i<n;i++){
+            ar[i]=in.nextInt(); 
+        }
+        partition(ar);
+       }    
+   }
