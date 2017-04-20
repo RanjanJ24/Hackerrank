@@ -1,0 +1,55 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner in = new Scanner(System.in);
+        
+        long T = in.nextInt();
+        for(long t = 0; t<T; t++){
+            BigInteger N = new BigInteger(in.next());
+            if(N.compareTo(BigInteger.valueOf(1))==0){
+                System.out.println("Richard");
+                break;
+            }
+            else{
+                int count = 1;
+                while(N.compareTo(BigInteger.valueOf(1)) != 0){
+                     //if n is a power of 2
+                    if(N.bitCount() == 1){
+                        N = N.divide(BigInteger.valueOf(2));
+                        //System.out.print(N);
+                        count += 1; 
+                    }
+                    else{
+                        BigInteger base = new BigInteger("2");
+                        BigInteger n = new BigInteger("0");
+                        for(int j = 0; base.pow(j).compareTo(N)==-1 ; j++){
+                            n = base.pow(j);
+                            
+                        }
+                        N = N.subtract(n);
+                        //System.out.print(N);
+                        count += 1;
+                        //break;
+                        //N = N-power;
+                        //n = (int) n;
+                        //count += 1;
+
+                    }
+                }
+                if(count % 2 == 0){
+                    System.out.println("Louise");
+                }else{
+                    System.out.println("Richard");
+                }
+            }
+            
+        }
+    }
+}
